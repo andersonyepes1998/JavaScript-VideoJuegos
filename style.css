@@ -1,0 +1,86 @@
+/*estilos bubbles*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    background-color: black;
+}
+
+.container{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.bubbles{
+    position: relative;
+    display: flex;
+}
+
+.bubbles span{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background-color: #2858d3;
+    margin: 0 4px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px #4fc3dc44,
+    0 0 50px #4fc3dc,
+    0 0 100px #4fc3dc;
+    animation: animate 15s linear infinite;
+    animation-duration: calc(125s / var(--i));
+}
+.bubbles span:nth-child(even){
+    background-color: #bfff00;
+    box-shadow: 0 0 0 10px #bfff0044,
+    0 0 50px #bfff00,
+    0 0 100px #bfff00;
+}
+
+@keyframes animate{
+    0%
+    {
+       transform: translateY(100vh) scale(0); 
+    }
+    100%
+    {
+        transform: translateY(-10vh) scale(1); 
+    }
+}
+
+
+/*estilos BOTTON*/
+.content-Button{
+    display: flex;
+    justify-content: center;
+    margin-top: 25%;
+    position: relative;
+    z-index: 99;
+}
+
+.Button{
+    background-color: #00aae4;
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.8em 1em;
+    border-radius: 50px;
+    border: 2px solid white;
+}
+
+
+/*RESPONSIVE DESING*/
+
+@media (max-width: 640px) {
+    .content-Button{
+        width: 100%;
+        margin-top: 120%;
+    }
+
+    
+}
