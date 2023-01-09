@@ -1,0 +1,114 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: black;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, Courier, monospace;
+}
+
+.game-container{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 100vh;
+    width: 100vw;
+}
+
+canvas{
+    border: 4px solid #bfff00;
+    border-radius: 8px;
+    background-color: #feff9d;
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 100%;
+}
+
+button{
+    background-color: #2858d3;
+    border-radius: 8px;
+    border-color: #bfff00;
+    font-family: inherit;
+    margin: 0;
+    padding: 5px 20px;
+    width: 100px;
+    color: white;
+    cursor: pointer;
+}
+
+button:not(:last-child){
+    margin-right: 10px;
+}
+
+.messages{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 460px;
+}
+
+p {
+    display: block;
+    margin: 0;
+    width: 100%;
+}
+
+.container{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.bubbles{
+    position: relative;
+    display: flex;
+}
+
+.bubbles span{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background-color: #2858d3;
+    margin: 0 4px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px #4fc3dc44,
+    0 0 50px #4fc3dc,
+    0 0 100px #4fc3dc;
+    animation: animate 15s linear infinite;
+    animation-duration: calc(125s / var(--i));
+}
+.bubbles span:nth-child(even){
+    background-color: #bfff00;
+    box-shadow: 0 0 0 10px #bfff0044,
+    0 0 50px #bfff00,
+    0 0 100px #bfff00;
+}
+
+@keyframes animate{
+    0%
+    {
+       transform: translateY(100vh) scale(0); 
+    }
+    100%
+    {
+        transform: translateY(-10vh) scale(1); 
+    }
+}
+
+/* RESPOSIVE DESING DE BOTONES*/
+
+@media (max-width:440px){
+    button {margin-top: 25px;}
+    #up, #down {margin-left: 100%; margin-right: 100%; }
+}
