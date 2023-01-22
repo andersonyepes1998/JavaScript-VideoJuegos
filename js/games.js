@@ -4,14 +4,29 @@ const btnUp = document.getElementById('up');
 const btnLeft = document.getElementById('left');
 const btnRight = document.getElementById('right');
 const btnDown = document.getElementById('down');
+const heartsLive = document.getElementById('lives');
+const spamTime = document.getElementById('time');
 
 let canvasSize;
 let elementsSize;
+let level = 0;
+let lives = 3;
+
+let timeStar;
+let timePlayer;
+let timeInterval;
 
 const playerPosition = {
     x: undefined,
     y: undefined
 }
+
+const giftPosition = {
+    x: undefined,
+    y: undefined
+}
+
+let enemiesPoitions = [];
 
 //para que cargue nustro HTML cuando se recargue.
 
@@ -22,9 +37,9 @@ window.addEventListener('resize',setCanvasSize);
 function setCanvasSize() {
     
     if (window.innerHeight > window.innerWidth){
-        canvasSize = window.innerWidth * 0.8;
+        canvasSize = window.innerWidth * 0.83;
     } else {
-        canvasSize = window.innerHeight * 0.8;
+        canvasSize = window.innerHeight * 0.83;
     }
 
     canvas.setAttribute('width', canvasSize);
@@ -43,10 +58,25 @@ function startGame(){
     game.font = elementsSize + 'px Verdana';
     game.textAlign = 'center'
 
-    const map = maps[0];
+    const map = maps[level];
+
+    if(!map) {
+        gameWin();
+        return;
+    }
+
+    if(!timeStar){ //si timeStar 'NO TIENE TIEMPO', asi se le con el signo de admiracion.
+        timeStar = Date.now();
+        timeInterval = setInterval(showTime, 100);
+    }
+
     const mapRows = map.trim().split('\n');
     const mapRowsCols = mapRows.map(row => row.trim().split(''));
     console.log({map,mapRows});
+
+    showLives();
+
+    enemiesPoitions = [];
 
     game.clearRect(0,0,canvasSize,canvasSize);
 
@@ -63,6 +93,14 @@ function startGame(){
                         playerPosition.y = posY;
                         console.log({playerPosition});
                    }
+                }else if(col == 'I'){
+                    giftPosition.x = posX;
+                    giftPosition.y = posY;
+                }else if (col == 'X'){
+                    enemiesPoitions.push({
+                        x: posX,
+                        y: posY
+                    })
                 }
 
 
@@ -89,7 +127,64 @@ function startGame(){
 }
 
 function movePlayer() {
+
+    const giftCollisionX = playerPosition.x.toFixed(3)== giftPosition.x.toFixed(3);
+    const giftCollisionY = playerPosition.y.toFixed(3) == giftPosition.y.toFixed(3);
+    const giftCollision = giftCollisionX && giftCollisionY;
+
+    if (giftCollision) {
+        levelWin();
+
+    }
+
+    const enemiesCollision = enemiesPoitions.find(enemies => {
+      const enemiesCollisionX =  enemies.x.toFixed(3) == playerPosition.x.toFixed(3);
+      const enemiesCollisionY =  enemies.y.toFixed(3) == playerPosition.y.toFixed(3);
+      return enemiesCollisionX && enemiesCollisionY
+    });
+
+    if (enemiesCollision) {
+        levelFail();
+    }
+
     game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y);
+}
+
+function levelWin() {
+    console.log('subistes de nivel');
+    level++;
+    startGame();
+};
+
+function levelFail() {
+    alert('chocastes contra un enmigo');
+    lives--;
+
+    if (lives <= 0) {
+        level=0;
+        lives=3;
+        timeStar=undefined;
+    }
+    playerPosition.x = undefined;
+    playerPosition.y = undefined;
+    startGame();
+}
+
+function gameWin() {
+    alert('Terminastes el juego!!!')
+    clearInterval(timeInterval);
+}
+
+function showLives() {
+
+    const heartsArray= Array(lives).fill(emojis['HEART']) // [1,2,3]
+
+    heartsLive.innerHTML = ''; //para que limpie despues de borrar cada corazon.
+    heartsLive.innerHTML = heartsArray;
+}
+
+function showTime() {
+    spamTime.innerHTML= Date.now() - timeStar;
 }
 
 
@@ -122,7 +217,7 @@ function moveUp() {
 
 function moveLeft() {
     if ((playerPosition.x-elementsSize) < elementsSize) {
-        console.log('OUT');
+        
     }else{
         playerPosition.x -= elementsSize;
         startGame();

@@ -15,7 +15,7 @@ body{
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    height: 100vh;
+    height: 95vh;
     width: 100vw;
 }
 
@@ -23,6 +23,8 @@ canvas{
     border: 4px solid #bfff00;
     border-radius: 8px;
     background-color: #feff9d;
+    padding-top: 28px;
+    padding-right: 20px;
 }
 
 .btns {
@@ -55,6 +57,7 @@ button:not(:last-child){
     margin: 0 auto;
     width: 80%;
     max-width: 460px;
+    
 }
 
 p {
