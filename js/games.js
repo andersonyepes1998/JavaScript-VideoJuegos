@@ -6,6 +6,8 @@ const btnRight = document.getElementById('right');
 const btnDown = document.getElementById('down');
 const heartsLive = document.getElementById('lives');
 const spamTime = document.getElementById('time');
+const spamRecord = document.getElementById('record');
+const pResult = document.getElementById('resul');
 
 let canvasSize;
 let elementsSize;
@@ -34,20 +36,28 @@ window.addEventListener('load',setCanvasSize);
 window.addEventListener('resize',setCanvasSize);
 
 
+function fixNumber(n){
+    return Number (n.toFixed(0));
+}
+
 function setCanvasSize() {
     
     if (window.innerHeight > window.innerWidth){
-        canvasSize = window.innerWidth * 0.83;
+        canvasSize = window.innerWidth * 0.75;
     } else {
-        canvasSize = window.innerHeight * 0.83;
+        canvasSize = window.innerHeight * 0.75;
     }
+
+    canvasSize = Number(canvasSize.toFixed(0));// Aqui estoy pasando un numero que tiene strig a numero entero
 
     canvas.setAttribute('width', canvasSize);
     canvas.setAttribute('height', canvasSize);
 
-    
 
     elementsSize = canvasSize * 0.093;
+
+    playerPosition.x = undefined;
+    playerPosition.y = undefined;
     startGame();
 }
 
@@ -68,6 +78,7 @@ function startGame(){
     if(!timeStar){ //si timeStar 'NO TIENE TIEMPO', asi se le con el signo de admiracion.
         timeStar = Date.now();
         timeInterval = setInterval(showTime, 100);
+        showRecord();
     }
 
     const mapRows = map.trim().split('\n');
@@ -171,8 +182,22 @@ function levelFail() {
 }
 
 function gameWin() {
-    alert('Terminastes el juego!!!')
+   // alert('Terminastes el juego!!!')
     clearInterval(timeInterval);
+
+    const recordTime = localStorage.getItem('record_Time');
+    const playerTime = Date.now() - timeStar;
+    if (recordTime) {
+        if (recordTime>=playerTime) {
+            localStorage.setItem('record_Time',playerTime);
+            pResult.innerHTML = 'SUPERASTES EL RECORD!!!';
+        }else{
+            pResult.innerHTML ='Lo siento, no superastes el RECORD 😥';
+        }
+    }else{
+        localStorage.setItem('record_Time',playerTime);
+        pResult.innerHTML ='Muy bien, trata de superar el nuevo tiempo.';
+    }
 }
 
 function showLives() {
@@ -185,6 +210,10 @@ function showLives() {
 
 function showTime() {
     spamTime.innerHTML= Date.now() - timeStar;
+}
+
+function showRecord() {
+    spamRecord.innerHTML = localStorage.getItem('record_Time');
 }
 
 
@@ -213,6 +242,7 @@ function moveUp() {
         playerPosition.y -= elementsSize;
         startGame();
     }
+    
 }
 
 function moveLeft() {
@@ -222,6 +252,7 @@ function moveLeft() {
         playerPosition.x -= elementsSize;
         startGame();
     }
+    
 }
 
 function moveRight() {
@@ -231,6 +262,7 @@ function moveRight() {
         playerPosition.x += elementsSize;
         startGame();
     }
+   
 }
 
 function moveDown() {
@@ -240,4 +272,5 @@ function moveDown() {
         playerPosition.y += elementsSize;
         startGame();
     }
+    
 }

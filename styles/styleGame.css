@@ -53,11 +53,10 @@ button:not(:last-child){
 
 .messages{
     display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
+   /* flex-wrap: wrap; es para que quede todo verticalmente*/
+    justify-content: center;
     width: 80%;
-    max-width: 460px;
-    
+    max-width: 750px;
 }
 
 p {
@@ -112,6 +111,6 @@ p {
 /* RESPOSIVE DESING DE BOTONES*/
 
 @media (max-width:440px){
-    button {margin-top: 25px;}
+    button {margin-top: 5px;}
     #up, #down {margin-left: 100%; margin-right: 100%; }
 }
