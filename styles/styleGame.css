@@ -20,9 +20,9 @@ body{
 }
 
 canvas{
-    border: 4px solid #bfff00;
+    border: 4px solid #2858d3;
     border-radius: 8px;
-    background-color: #feff9d;
+    background-color: black;
     padding-top: 28px;
     padding-right: 20px;
 }
@@ -36,19 +36,29 @@ canvas{
 }
 
 button{
-    background-color: #2858d3;
+    background-color: white;
     border-radius: 8px;
-    border-color: #bfff00;
-    font-family: inherit;
-    margin: 0;
-    padding: 5px 20px;
+    border:  3px solid #2858d3;
+    margin: 10px;
+    padding: 10px;
     width: 100px;
-    color: white;
+    color:black;
     cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
 }
 
-button:not(:last-child){
-    margin-right: 10px;
+.inicio{
+    background-color: red;
+    color: yellow;
+    margin-left: 250px;
+}
+
+.inicio:hover{
+    background-color: black;
+    color: white;
+    border:  3px solid red;
+    box-shadow: 1px 5px 6px white;
 }
 
 .messages{
@@ -56,7 +66,7 @@ button:not(:last-child){
    /* flex-wrap: wrap; es para que quede todo verticalmente*/
     justify-content: center;
     width: 80%;
-    max-width: 750px;
+    max-width: 1200px;
 }
 
 p {
@@ -91,10 +101,10 @@ p {
     animation-duration: calc(125s / var(--i));
 }
 .bubbles span:nth-child(even){
-    background-color: #bfff00;
-    box-shadow: 0 0 0 10px #bfff0044,
-    0 0 50px #bfff00,
-    0 0 100px #bfff00;
+    background-color: #ff0000;
+    box-shadow: 0 0 0 10px #ff000044,
+    0 0 50px #ff0000,
+    0 0 100px #ff0000;
 }
 
 @keyframes animate{

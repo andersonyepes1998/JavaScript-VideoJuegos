@@ -6,12 +6,13 @@
 const emojis = {
     '-': ' ',
     'O': '🚪',
-    'X': '💣',
+    'X': '💥',
     'I': '🎁',
-    'PLAYER': '👀',
+    'A': '👽',
+    'PLAYER': '💀',
     'BOMB_COLLISION': '🔥',
     'GAME_OVER': '👎',
-    'WIN': '🏆',
+    'M': '🏆',
     'HEART':'💖'
   };
   

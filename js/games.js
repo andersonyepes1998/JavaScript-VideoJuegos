@@ -8,6 +8,8 @@ const heartsLive = document.getElementById('lives');
 const spamTime = document.getElementById('time');
 const spamRecord = document.getElementById('record');
 const pResult = document.getElementById('resul');
+const btnStart = document.getElementById('btnStart');
+const spamNivel = document.getElementById('nivel');
 
 let canvasSize;
 let elementsSize;
@@ -40,12 +42,14 @@ function fixNumber(n){
     return Number (n.toFixed(0));
 }
 
+ 
+
 function setCanvasSize() {
     
     if (window.innerHeight > window.innerWidth){
-        canvasSize = window.innerWidth * 0.8;
+        canvasSize = window.innerWidth * 0.82;
     } else {
-        canvasSize = window.innerHeight * 0.8;
+        canvasSize = window.innerHeight * 0.82;
     }
 
     canvasSize = Number(canvasSize.toFixed(0));// Aqui estoy pasando un numero que tiene strig a numero entero
@@ -67,6 +71,7 @@ function startGame(){
 
     game.font = elementsSize + 'px Verdana';
     game.textAlign = 'center'
+
 
     const map = maps[level];
 
@@ -162,7 +167,15 @@ function movePlayer() {
 }
 
 function levelWin() {
-    console.log('subistes de nivel');
+    //console.log('subistes de nivel');
+    
+    if (level === 0) {
+        spamNivel.innerHTML = 'Nivel 1';
+    }else if (level === 1){
+        spamNivel.innerHTML = 'Nivel 2';
+    }else{
+        alert('Terminastes el Juego');
+    }
     level++;
     startGame();
 };
@@ -215,6 +228,15 @@ function showTime() {
 function showRecord() {
     spamRecord.innerHTML = localStorage.getItem('record_Time');
 }
+
+
+/* PARA REFRESCAR LA PAGINA */
+btnStart.addEventListener('click', start)
+
+function start(){
+    location.reload();
+}
+/* PARA REFRESCAR LA PAGINA */
 
 
 window.addEventListener('keydown', moveByKeys)
