@@ -10,6 +10,7 @@ const spamRecord = document.getElementById('record');
 const pResult = document.getElementById('resul');
 const btnStart = document.getElementById('btnStart');
 const spamNivel = document.getElementById('nivel');
+const titulosGa = document.getElementById('titulosGanados');
 
 let canvasSize;
 let elementsSize;
@@ -19,6 +20,7 @@ let lives = 3;
 let timeStar;
 let timePlayer;
 let timeInterval;
+let triunfo;
 
 const playerPosition = {
     x: undefined,
@@ -131,7 +133,7 @@ function startGame(){
    // }
    //window.innerHeight
     //window.innerWidth
-    //game.fillRect(0,50,100,100); con fill podemos crear un retangulo.
+    //game.fillRect(0,50,100,100); 
     //game.clearRect(50,50,50,50); con clear podemos borrar una parte del retangulo.
     //game.clearRect()
     //con estas propiedades les podemos dar estilos a canvas desde JS.
@@ -168,13 +170,14 @@ function movePlayer() {
 
 function levelWin() {
     //console.log('subistes de nivel');
+
     
     if (level === 0) {
-        spamNivel.innerHTML = 'Nivel 1';
-    }else if (level === 1){
         spamNivel.innerHTML = 'Nivel 2';
+    }else if (level === 1){
+        spamNivel.innerHTML = 'Nivel 3';
     }else{
-        alert('Terminastes el Juego');
+        spamNivel.innerHTML ='Terminastes el Juego';
     }
     level++;
     startGame();
@@ -229,6 +232,11 @@ function showRecord() {
     spamRecord.innerHTML = localStorage.getItem('record_Time');
 }
 
+function titulos() {
+    const tiunfoArray = (emojis['M']);
+    titulosGa.innerHTML = tiunfoArray;
+
+}
 
 /* PARA REFRESCAR LA PAGINA */
 btnStart.addEventListener('click', start)
